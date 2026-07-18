@@ -270,24 +270,52 @@ export function Hero({ started }: { started: boolean }) {
         </div>
       </motion.div>
 
-      {/* ── Scroll indicator — right edge ── */}
+      {/* ── Right-edge credential strip ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={started ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
-        className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-3 z-20"
+        transition={{ delay: 1.6, duration: 0.8 }}
+        className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-5 z-20"
       >
-        <span
-          className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/20"
-          style={{ writingMode: 'vertical-rl' }}
-        >
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 7, 0] }}
-          transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-          className="w-px h-8 bg-gradient-to-b from-primary/40 to-transparent"
-        />
+        {/* Availability pulse */}
+        <div className="flex flex-col items-center gap-2.5">
+          <div className="relative flex-shrink-0">
+            <span className="absolute w-2 h-2 rounded-full bg-emerald-400 opacity-35 animate-ping" />
+            <span className="relative block w-2 h-2 rounded-full bg-emerald-400" />
+          </div>
+          <span
+            className="font-mono text-[9px] tracking-[0.28em] uppercase text-white/35"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            Available Now
+          </span>
+        </div>
+
+        {/* Divider */}
+        <div className="w-px h-5 bg-white/[0.07]" />
+
+        {/* Timezone */}
+        <div className="flex flex-col items-center gap-2">
+          <span
+            className="font-mono text-[9px] tracking-[0.22em] uppercase text-white/20"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            PKT · GMT+5
+          </span>
+        </div>
+
+        {/* Divider */}
+        <div className="w-px h-5 bg-white/[0.07]" />
+
+        {/* Response time */}
+        <div className="flex flex-col items-center gap-2">
+          <span
+            className="font-mono text-[9px] tracking-[0.22em] uppercase text-white/20"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            24h Response
+          </span>
+        </div>
       </motion.div>
     </section>
   );
