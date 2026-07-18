@@ -651,7 +651,31 @@ function ContactForm() {
     e.preventDefault();
     if (submitState !== 'idle') return;
     setSubmitState('loading');
-    setTimeout(() => setSubmitState('success'), 2000);
+
+    const projectLabel = PROJECT_TYPES.find(p => p.value === form.projectType)?.label ?? form.projectType;
+    const budgetLabel  = BUDGETS.find(b => b.value === form.budget)?.label ?? form.budget;
+    const timelineLabel = TIMELINES.find(t => t.value === form.timeline)?.label ?? form.timeline;
+
+    const subject = encodeURIComponent(
+      `New Project Inquiry — ${projectLabel || 'General'} from ${form.name || 'a visitor'}`
+    );
+    const body = encodeURIComponent(
+      [
+        `Name:     ${form.name}`,
+        `Email:    ${form.email}`,
+        `Country:  ${form.country}`,
+        ``,
+        `Project:  ${projectLabel}`,
+        `Budget:   ${budgetLabel}`,
+        `Timeline: ${timelineLabel}`,
+        ``,
+        `Message:`,
+        form.message,
+      ].join('\n')
+    );
+
+    window.open(`mailto:zilkjiro@gmail.com?subject=${subject}&body=${body}`, '_blank');
+    setTimeout(() => setSubmitState('success'), 600);
   };
 
   return (

@@ -7,6 +7,7 @@ import { Hero } from '@/components/Hero';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
 import { Roadmap } from '@/components/Roadmap';
 import { Services } from '@/components/Services';
+import { Team } from '@/components/Team';
 import { Contact } from '@/components/Contact';
 import { useSEO, BASE_TITLE } from '@/hooks/useSEO';
 
@@ -54,6 +55,7 @@ export function Home() {
         <ProjectsGrid />
         <Services />
         <Roadmap />
+        <Team />
         <Contact />
       </main>
     </motion.div>

@@ -1,0 +1,220 @@
+Task: Add a new "Meet the Team" section.
+
+Do NOT redesign the website.
+
+Do NOT modify existing sections.
+
+Create a new section between the "Projects" section and the "Contact" section.
+
+This section should introduce the people behind Zilk Co. and increase trust with potential clients.
+
+The goal is to show that real people with different expertise work together to deliver software.
+
+The design should match the premium visual language already established on the website.
+
+--------------------------------------------
+
+Section Heading
+
+Meet the Team
+
+Subtitle:
+
+The people behind every product.
+
+A focused team with specialized expertise.
+
+Direct communication.
+
+No outsourcing.
+
+Every project is designed, engineered, and delivered by people you know.
+
+--------------------------------------------
+
+Layout
+
+Create a premium responsive grid.
+
+Desktop:
+3 cards per row
+
+Tablet:
+2 cards per row
+
+Mobile:
+1 card per row
+
+Use generous spacing and clean typography.
+
+Avoid making the cards look like the project cards.
+
+Give them their own visual identity while staying consistent with the overall design.
+
+--------------------------------------------
+
+Each team card should contain:
+
+• Professional avatar placeholder (simple initials or elegant placeholder, we will replace photos later)
+
+• Name
+
+• Position
+
+• Short role description
+
+• Expertise tags
+
+• Small hover animation
+
+• Smooth entrance animation when scrolled into view
+
+Hover effects should be subtle.
+
+Do NOT use exaggerated scaling.
+
+Do NOT use glowing effects.
+
+Do NOT copy the Project cards.
+
+--------------------------------------------
+
+Team Members
+
+Mustafa
+
+Founder
+
+Vision
+
+Strategy
+
+Software Architecture
+
+Role description:
+
+Leads company direction, product vision, and technical architecture while ensuring every project meets enterprise standards.
+
+--------------------------------------------
+
+Ayaan
+
+Founder
+
+Operations
+
+Product Management
+
+Client Communication
+
+Role description:
+
+Coordinates projects, manages operations, and ensures smooth collaboration between clients and the engineering team.
+
+--------------------------------------------
+
+Ali
+
+Software Engineer
+
+Frontend
+
+Backend
+
+Systems
+
+Role description:
+
+Builds modern web applications, APIs, databases, and scalable software systems.
+
+--------------------------------------------
+
+Agha
+
+Marketing
+
+Brand Strategy
+
+Growth
+
+Client Relations
+
+Role description:
+
+Develops marketing strategies, strengthens the brand, and manages client relationships.
+
+--------------------------------------------
+
+Shehwar
+
+Security Manager
+
+Cyber Security
+
+Infrastructure
+
+Best Practices
+
+Role description:
+
+Focuses on application security, infrastructure reliability, and maintaining secure development standards.
+
+--------------------------------------------
+
+Ahmed
+
+Personal Advisor
+
+Business Strategy
+
+Planning
+
+Consulting
+
+Role description:
+
+Provides strategic guidance for business decisions, long-term planning, and company growth.
+
+--------------------------------------------
+
+Design Direction
+
+The section should communicate professionalism and trust.
+
+It should feel like meeting the people behind the company.
+
+Avoid making it look like a social media profile section.
+
+Instead, make it feel like the leadership page of a premium software company.
+
+Use excellent typography, spacing, hierarchy, and subtle motion.
+
+Do not overuse effects.
+
+Quality should come from composition, not decoration.
+
+--------------------------------------------
+
+Optional Enhancement
+
+On hover, reveal a small line such as:
+
+"Available for enterprise projects"
+
+or
+
+"Building software that lasts."
+
+Keep it subtle.
+
+--------------------------------------------
+
+Final Requirement
+
+After implementing the section:
+
+Review spacing, responsiveness, accessibility, and animations.
+
+Ensure it integrates naturally with the surrounding sections and feels like it has always been part of the website.
+
+Do not modify any other sections.

@@ -426,7 +426,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
             transition={{ type: 'spring', stiffness: 340, damping: 38, mass: 0.9 }}
             className="fixed z-[9999] flex flex-col overflow-hidden"
             style={{
-              background: 'hsl(240 11% 5%)',
+              background: 'hsl(240 9% 10%)',
               borderRadius: '14px',
               inset: '3vh 3vw',
               boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px hsl(0 0% 100% / 0.07)',
