@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Zilk Co. Portfolio"
+version = "1.0.0"
+id = "artifacts/zilk-co"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20840
+
+[services.development]
+run = "pnpm --filter @workspace/zilk-co run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zilk-co", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/zilk-co/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20840"
+BASE_PATH = "/"
