@@ -1,4 +1,4 @@
-import { useState, useRef, FormEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, Loader2, MapPin, Mail, Clock, Globe } from 'lucide-react';
 import { staggerContainer, fadeUp, clipReveal, drawLine } from '@/lib/animations';
@@ -48,7 +48,7 @@ const COUNTRIES = [
   'Nigeria', 'United States', 'United Kingdom', 'Canada', 'Australia',
   'Germany', 'France', 'Netherlands', 'Sweden', 'Norway',
   'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Kenya', 'Ghana',
-  'South Africa', 'India', 'Singapore', 'New Zealand', 'Brazil',
+  'South Africa', 'India', 'Pakistan', 'Singapore', 'New Zealand', 'Brazil',
   'Mexico', 'Spain', 'Italy', 'Switzerland', 'Japan',
 ];
 
@@ -187,7 +187,7 @@ function FormInput({
 }
 
 /* ─────────────────────────────────────────
-   COUNTRY SELECT
+   COUNTRY SELECT — searchable combobox
 ───────────────────────────────────────── */
 function CountrySelect({
   value,
@@ -196,46 +196,224 @@ function CountrySelect({
   value: string;
   onChange: (v: string) => void;
 }) {
-  const [focused, setFocused] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const listboxId = 'country-listbox';
+
+  const filtered = query.trim()
+    ? COUNTRIES.filter((c) => c.toLowerCase().includes(query.toLowerCase()))
+    : COUNTRIES;
+
+  // Close on outside click
+  const handleOutside = useCallback((e: MouseEvent) => {
+    if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      setOpen(false);
+      setQuery('');
+      setActiveIdx(-1);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, [handleOutside]);
+
+  // Scroll active option into view
+  useEffect(() => {
+    if (activeIdx >= 0 && listRef.current) {
+      const el = listRef.current.children[activeIdx] as HTMLElement;
+      el?.scrollIntoView({ block: 'nearest' });
+    }
+  }, [activeIdx]);
+
+  const selectOption = (country: string) => {
+    onChange(country);
+    setOpen(false);
+    setQuery('');
+    setActiveIdx(-1);
+    inputRef.current?.blur();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!open) {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setOpen(true);
+        setActiveIdx(0);
+      }
+      return;
+    }
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setActiveIdx((i) => Math.min(i + 1, filtered.length - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setActiveIdx((i) => Math.max(i - 1, 0));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (activeIdx >= 0 && filtered[activeIdx]) selectOption(filtered[activeIdx]);
+        break;
+      case 'Escape':
+        setOpen(false);
+        setQuery('');
+        setActiveIdx(-1);
+        break;
+      case 'Tab':
+        setOpen(false);
+        setQuery('');
+        setActiveIdx(-1);
+        break;
+    }
+  };
+
+  const inputFocused = open;
+  const displayValue = open ? query : value;
+  const optionId = (i: number) => `country-option-${i}`;
 
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/40">
+    <div className="flex flex-col gap-2" ref={containerRef}>
+      <label
+        htmlFor="country-input"
+        className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/40"
+      >
         Country
       </label>
+
       <div className="relative">
-        <select
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          className="w-full appearance-none bg-white/[0.02] border rounded-[4px] px-4 py-3 text-[14px] outline-none transition-all duration-300 cursor-pointer font-sans pr-10"
+        {/* Combobox input */}
+        <input
+          id="country-input"
+          ref={inputRef}
+          role="combobox"
+          aria-expanded={open}
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
+          aria-controls={listboxId}
+          aria-activedescendant={activeIdx >= 0 ? optionId(activeIdx) : undefined}
+          autoComplete="off"
+          spellCheck={false}
+          placeholder={value ? value : 'Select your country'}
+          value={displayValue}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setActiveIdx(0);
+            if (!open) setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={handleKeyDown}
+          className="w-full bg-white/[0.02] border rounded-[4px] px-4 py-3 text-[14px] outline-none transition-all duration-300 font-sans pr-10 cursor-pointer"
           style={{
-            borderColor: focused
+            borderColor: inputFocused
               ? 'hsl(185 82% 50% / 0.5)'
               : 'hsl(0 0% 100% / 0.08)',
-            boxShadow: focused
+            boxShadow: inputFocused
               ? '0 0 0 3px hsl(185 82% 50% / 0.08)'
               : 'none',
-            color: value ? 'hsl(0 0% 100% / 0.85)' : 'hsl(0 0% 100% / 0.2)',
-            background: focused ? 'hsl(0 0% 100% / 0.04)' : 'hsl(0 0% 100% / 0.02)',
+            color: value && !open
+              ? 'hsl(0 0% 100% / 0.85)'
+              : open
+              ? 'hsl(0 0% 100% / 0.85)'
+              : 'hsl(0 0% 100% / 0.2)',
+            background: inputFocused ? 'hsl(0 0% 100% / 0.04)' : 'hsl(0 0% 100% / 0.02)',
           }}
+        />
+
+        {/* Chevron toggle */}
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={() => {
+            if (open) {
+              setOpen(false);
+              setQuery('');
+              setActiveIdx(-1);
+            } else {
+              setOpen(true);
+              inputRef.current?.focus();
+            }
+          }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 pointer-events-auto"
         >
-          <option value="" disabled style={{ background: '#0a0b10', color: '#666' }}>
-            Select your country
-          </option>
-          {COUNTRIES.map((c) => (
-            <option key={c} value={c} style={{ background: '#0d0e14', color: '#dde' }}>
-              {c}
-            </option>
-          ))}
-        </select>
-        {/* Chevron */}
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+          <svg
+            width="10" height="6" viewBox="0 0 10 6" fill="none"
+            style={{
+              transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s',
+            }}
+          >
             <path d="M1 1L5 5L9 1" stroke="hsl(0 0% 100% / 0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </div>
+        </button>
+
+        {/* Dropdown */}
+        <AnimatePresence>
+          {open && (
+            <motion.ul
+              key="dropdown"
+              ref={listRef}
+              id={listboxId}
+              role="listbox"
+              aria-label="Countries"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute z-50 left-0 right-0 mt-1.5 rounded-[4px] border border-white/[0.1] overflow-y-auto"
+              style={{
+                background: 'hsl(240 11% 8%)',
+                boxShadow: '0 16px 48px rgba(0,0,0,0.7)',
+                maxHeight: '13rem',
+              }}
+            >
+              {filtered.length === 0 ? (
+                <li className="px-4 py-3 text-[13px] text-white/30 font-sans select-none">
+                  No results for "{query}"
+                </li>
+              ) : (
+                filtered.map((country, i) => {
+                  const isActive = i === activeIdx;
+                  const isSelected = country === value;
+                  return (
+                    <li
+                      key={country}
+                      id={optionId(i)}
+                      role="option"
+                      aria-selected={isSelected}
+                      onMouseDown={(e) => { e.preventDefault(); selectOption(country); }}
+                      onMouseEnter={() => setActiveIdx(i)}
+                      className="px-4 py-2.5 text-[13px] font-sans cursor-pointer flex items-center justify-between transition-colors duration-100"
+                      style={{
+                        background: isActive
+                          ? 'hsl(185 82% 50% / 0.1)'
+                          : isSelected
+                          ? 'hsl(185 82% 50% / 0.05)'
+                          : 'transparent',
+                        color: isSelected
+                          ? 'hsl(185 82% 55%)'
+                          : isActive
+                          ? 'hsl(0 0% 100% / 0.9)'
+                          : 'hsl(0 0% 100% / 0.6)',
+                      }}
+                    >
+                      {country}
+                      {isSelected && (
+                        <Check size={12} className="flex-shrink-0" style={{ color: 'hsl(185 82% 55%)' }} />
+                      )}
+                    </li>
+                  );
+                })
+              )}
+            </motion.ul>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -393,8 +571,8 @@ function ContactLeft() {
       {/* Contact details */}
       <motion.div variants={staggerContainer(0.07, 0)} className="flex flex-col gap-4">
         {[
-          { Icon: MapPin, label: 'Location', value: 'Lagos, Nigeria' },
-          { Icon: Mail, label: 'Email', value: 'hello@zilkco.com' },
+          { Icon: MapPin, label: 'Location', value: 'Naval Colony, Karachi, Pakistan' },
+          { Icon: Mail, label: 'Email', value: 'zilkjiro@gmail.com' },
           { Icon: Globe, label: 'Web', value: 'zilkco.com' },
           { Icon: Clock, label: 'Response', value: 'Within 24 hours' },
         ].map(({ Icon, label, value }) => (
