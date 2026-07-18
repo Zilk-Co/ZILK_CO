@@ -15,7 +15,7 @@ interface TeamMember {
   hue: number;
 }
 
-const TEAM: TeamMember[] = [
+const FOUNDERS: TeamMember[] = [
   {
     initials: 'MU',
     name: 'Mustafa',
@@ -36,6 +36,9 @@ const TEAM: TeamMember[] = [
     tagline: 'Every project, on time.',
     hue: 210,
   },
+];
+
+const TEAM: TeamMember[] = [
   {
     initials: 'AL',
     name: 'Ali',
@@ -79,7 +82,159 @@ const TEAM: TeamMember[] = [
 ];
 
 /* ─────────────────────────────────────────
-   TEAM CARD
+   FOUNDER CARD — elevated, distinct
+───────────────────────────────────────── */
+function FounderCard({ member, index }: { member: TeamMember; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const accent = `hsl(${member.hue} 75% 58%)`;
+  const accentFaint = `hsl(${member.hue} 75% 58% / 0.07)`;
+
+  return (
+    <motion.div
+      variants={fadeUp}
+      custom={index}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col overflow-hidden"
+      style={{
+        borderRadius: '8px',
+        border: `1px solid ${hovered ? `hsl(${member.hue} 75% 58% / 0.3)` : 'hsl(0 0% 100% / 0.1)'}`,
+        background: hovered
+          ? `hsl(${member.hue} 75% 58% / 0.05)`
+          : 'hsl(0 0% 100% / 0.03)',
+        transition: 'border-color 0.4s, background 0.4s',
+        boxShadow: hovered
+          ? `0 24px 60px rgba(0,0,0,0.5)`
+          : '0 8px 32px rgba(0,0,0,0.3)',
+      }}
+    >
+      {/* Top accent line — draws in on hover */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] origin-left"
+        animate={{ scaleX: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
+      />
+
+      {/* Subtle corner glow */}
+      <motion.div
+        className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        style={{
+          background: `radial-gradient(circle at top right, hsl(${member.hue} 75% 58% / 0.08), transparent 70%)`,
+        }}
+      />
+
+      <div className="relative flex flex-col gap-6 p-8 md:p-10">
+        {/* Top row: avatar + name + "Founder" badge */}
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-5">
+            {/* Larger avatar */}
+            <div
+              className="flex-shrink-0 w-16 h-16 rounded-[6px] flex items-center justify-center"
+              style={{
+                background: hovered ? accentFaint : 'hsl(0 0% 100% / 0.04)',
+                border: `1px solid ${hovered ? `hsl(${member.hue} 75% 58% / 0.3)` : 'hsl(0 0% 100% / 0.09)'}`,
+                transition: 'background 0.4s, border-color 0.4s',
+              }}
+            >
+              <span
+                className="font-display font-bold text-[16px] tracking-wider"
+                style={{
+                  color: hovered ? accent : 'hsl(0 0% 100% / 0.5)',
+                  transition: 'color 0.3s',
+                }}
+              >
+                {member.initials}
+              </span>
+            </div>
+
+            {/* Name + role */}
+            <div>
+              <div
+                className="font-display font-extrabold text-white leading-tight tracking-tight"
+                style={{ fontSize: '1.25rem' }}
+              >
+                {member.name}
+              </div>
+              <div
+                className="font-mono text-[9px] tracking-[0.24em] uppercase mt-1.5"
+                style={{
+                  color: hovered ? accent : 'hsl(0 0% 100% / 0.3)',
+                  transition: 'color 0.3s',
+                }}
+              >
+                {member.position}
+              </div>
+            </div>
+          </div>
+
+          {/* Founder chip */}
+          <div
+            className="flex-shrink-0 px-2.5 py-1 rounded-[3px] font-mono text-[9px] tracking-[0.2em] uppercase"
+            style={{
+              background: `hsl(${member.hue} 75% 58% / 0.1)`,
+              border: `1px solid hsl(${member.hue} 75% 58% / 0.2)`,
+              color: accent,
+            }}
+          >
+            Founder
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div
+          className="h-px"
+          style={{
+            background: hovered
+              ? `linear-gradient(90deg, hsl(${member.hue} 75% 58% / 0.35), transparent)`
+              : 'hsl(0 0% 100% / 0.07)',
+            transition: 'background 0.4s',
+          }}
+        />
+
+        {/* Description */}
+        <p className="text-[14px] text-white/45 leading-[1.8] font-light">
+          {member.description}
+        </p>
+
+        {/* Expertise */}
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          {member.expertise.map((tag, i) => (
+            <span key={tag} className="flex items-center gap-2">
+              <span
+                className="font-mono text-[10px] tracking-[0.16em] uppercase"
+                style={{
+                  color: hovered ? `hsl(${member.hue} 75% 62%)` : 'hsl(0 0% 100% / 0.3)',
+                  transition: 'color 0.3s',
+                }}
+              >
+                {tag}
+              </span>
+              {i < member.expertise.length - 1 && (
+                <span className="text-white/12 text-[8px]">·</span>
+              )}
+            </span>
+          ))}
+        </div>
+
+        {/* Hover tagline */}
+        <motion.div
+          animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 5 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="font-mono text-[9px] tracking-[0.2em] uppercase"
+          style={{ color: `hsl(${member.hue} 75% 58% / 0.55)` }}
+        >
+          {member.tagline}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   TEAM CARD — regular members
 ───────────────────────────────────────── */
 function TeamCard({ member, index }: { member: TeamMember; index: number }) {
   const [hovered, setHovered] = useState(false);
@@ -111,7 +266,6 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
       <div className="flex flex-col gap-5 p-7">
         {/* Avatar + name row */}
         <div className="flex items-start gap-4">
-          {/* Initials avatar */}
           <div
             className="flex-shrink-0 w-12 h-12 rounded-[5px] flex items-center justify-center"
             style={{
@@ -121,21 +275,26 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
             }}
           >
             <span
-              className="font-display font-bold text-[13px] tracking-wider transition-colors duration-350"
-              style={{ color: hovered ? accent : 'hsl(0 0% 100% / 0.45)' }}
+              className="font-display font-bold text-[13px] tracking-wider"
+              style={{
+                color: hovered ? accent : 'hsl(0 0% 100% / 0.45)',
+                transition: 'color 0.3s',
+              }}
             >
               {member.initials}
             </span>
           </div>
 
-          {/* Name + position */}
           <div>
             <div className="font-display font-bold text-white text-[1.05rem] leading-tight tracking-tight">
               {member.name}
             </div>
             <div
-              className="font-mono text-[9px] tracking-[0.22em] uppercase mt-1 transition-colors duration-300"
-              style={{ color: hovered ? accent : 'hsl(0 0% 100% / 0.3)' }}
+              className="font-mono text-[9px] tracking-[0.22em] uppercase mt-1"
+              style={{
+                color: hovered ? accent : 'hsl(0 0% 100% / 0.3)',
+                transition: 'color 0.3s',
+              }}
             >
               {member.position}
             </div>
@@ -158,13 +317,16 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
           {member.description}
         </p>
 
-        {/* Expertise — plain text list, not pills */}
+        {/* Expertise */}
         <div className="flex flex-wrap gap-x-3 gap-y-1">
           {member.expertise.map((tag, i) => (
             <span key={tag} className="flex items-center gap-1.5">
               <span
-                className="font-mono text-[10px] tracking-[0.14em] uppercase transition-colors duration-300"
-                style={{ color: hovered ? `hsl(${member.hue} 70% 62%)` : 'hsl(0 0% 100% / 0.28)' }}
+                className="font-mono text-[10px] tracking-[0.14em] uppercase"
+                style={{
+                  color: hovered ? `hsl(${member.hue} 70% 62%)` : 'hsl(0 0% 100% / 0.28)',
+                  transition: 'color 0.3s',
+                }}
               >
                 {tag}
               </span>
@@ -175,7 +337,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
           ))}
         </div>
 
-        {/* Hover tagline — fades in */}
+        {/* Hover tagline */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 4 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
@@ -262,18 +424,63 @@ export function Team() {
           </div>
         </motion.div>
 
-        {/* Grid */}
-        <motion.div
-          variants={staggerContainer(0.07, 0.05)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
-        >
-          {TEAM.map((member, i) => (
-            <TeamCard key={member.name} member={member} index={i} />
-          ))}
-        </motion.div>
+        {/* ── Founders ── */}
+        <div className="mb-16 md:mb-20">
+          {/* Founders label */}
+          <motion.div
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-3 mb-8"
+          >
+            <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-white/25">
+              Founders
+            </span>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer(0.1, 0.05)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
+          >
+            {FOUNDERS.map((member, i) => (
+              <FounderCard key={member.name} member={member} index={i} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ── Team ── */}
+        <div>
+          {/* Team label */}
+          <motion.div
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-3 mb-8"
+          >
+            <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-white/25">
+              Team
+            </span>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer(0.07, 0.05)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
+          >
+            {TEAM.map((member, i) => (
+              <TeamCard key={member.name} member={member} index={i} />
+            ))}
+          </motion.div>
+        </div>
 
         {/* Footer rule */}
         <motion.div
