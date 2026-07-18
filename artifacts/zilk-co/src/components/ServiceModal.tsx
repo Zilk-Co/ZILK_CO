@@ -420,12 +420,17 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
           {/* ── Modal panel ── */}
           <motion.div
             key="modal"
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={{ type: 'spring', stiffness: 340, damping: 38, mass: 0.9 }}
-            className="fixed inset-x-0 bottom-0 top-[3vh] md:top-[5vh] z-[9999] flex flex-col rounded-t-[16px] md:rounded-t-[20px] overflow-hidden"
-            style={{ background: 'hsl(240 11% 5%)' }}
+            className="fixed z-[9999] flex flex-col overflow-hidden"
+            style={{
+              background: 'hsl(240 11% 5%)',
+              borderRadius: '14px',
+              inset: '3vh 3vw',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px hsl(0 0% 100% / 0.07)',
+            }}
           >
             {/* Accent top line */}
             <motion.div

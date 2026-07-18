@@ -42,7 +42,7 @@ export function Cursor() {
     <>
       {/* Inner dot — instant tracking, mix-blend-difference inverts colors */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
+        className="fixed top-0 left-0 z-[99999] pointer-events-none"
         style={{
           x: pos.x - 4,
           y: pos.y - 4,
@@ -63,7 +63,7 @@ export function Cursor() {
 
       {/* Outer ring — lagging spring follower */}
       <motion.div
-        className="fixed top-0 left-0 z-[9998] pointer-events-none"
+        className="fixed top-0 left-0 z-[99998] pointer-events-none"
         animate={{
           x: pos.x - 22,
           y: pos.y - 22,

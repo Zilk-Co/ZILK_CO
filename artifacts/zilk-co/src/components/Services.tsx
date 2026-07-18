@@ -353,50 +353,49 @@ function SaaSVisual({ hovered, hue }: { hovered: boolean; hue: number }) {
 }
 
 /** 06 · Motion & Animation — layered sine waves */
+// WavePath must live at module level — defining it inside MotionVisual
+// causes React to treat it as a new component type on every render,
+// which unmounts/remounts the motion element and resets the animation.
+function WavePath({
+  amplitude,
+  frequency,
+  yOffset,
+  phase,
+  opacity,
+  strokeWidth,
+  speed,
+  accent,
+}: {
+  amplitude: number;
+  frequency: number;
+  yOffset: number;
+  phase: number;
+  opacity: number;
+  strokeWidth: number;
+  speed: number;
+  accent: string;
+}) {
+  const points = Array.from({ length: 33 }, (_, i) => {
+    const x = i * 5;
+    const y = yOffset + amplitude * Math.sin((i * frequency + phase) * Math.PI);
+    return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
+  }).join(' ');
+
+  return (
+    <motion.path
+      d={points}
+      stroke={accent}
+      strokeWidth={strokeWidth}
+      fill="none"
+      opacity={opacity}
+      animate={{ translateX: [0, -160] }}
+      transition={{ duration: speed, repeat: Infinity, ease: 'linear' }}
+    />
+  );
+}
+
 function MotionVisual({ hovered, hue }: { hovered: boolean; hue: number }) {
   const accent = `hsl(${hue} 80% 55%)`;
-
-  const WavePath = ({
-    amplitude,
-    frequency,
-    yOffset,
-    phase,
-    opacity,
-    strokeWidth,
-    speed,
-  }: {
-    amplitude: number;
-    frequency: number;
-    yOffset: number;
-    phase: number;
-    opacity: number;
-    strokeWidth: number;
-    speed: number;
-  }) => {
-    const points = Array.from({ length: 33 }, (_, i) => {
-      const x = i * 5;
-      const y = yOffset + amplitude * Math.sin((i * frequency + phase) * Math.PI);
-      return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
-    }).join(' ');
-
-    return (
-      <motion.path
-        d={points}
-        stroke={accent}
-        strokeWidth={strokeWidth}
-        fill="none"
-        opacity={opacity}
-        animate={{
-          translateX: [0, -160],
-        }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      />
-    );
-  };
 
   return (
     <svg viewBox="0 0 160 128" className="w-full h-full overflow-hidden" fill="none" style={{ overflow: 'hidden' }}>
@@ -411,9 +410,9 @@ function MotionVisual({ hovered, hue }: { hovered: boolean; hue: number }) {
         {/* Wave layers — repeated so the loop looks seamless */}
         {[0, 160, 320].map(offset => (
           <g key={offset} transform={`translate(${offset}, 0)`}>
-            <WavePath amplitude={hovered ? 28 : 18} frequency={0.5} yOffset={44} phase={0} opacity={hovered ? 0.7 : 0.45} strokeWidth={2} speed={hovered ? 2.5 : 5} />
-            <WavePath amplitude={hovered ? 20 : 12} frequency={0.7} yOffset={64} phase={1.2} opacity={hovered ? 0.5 : 0.28} strokeWidth={1.5} speed={hovered ? 3.5 : 7} />
-            <WavePath amplitude={hovered ? 14 : 8} frequency={0.9} yOffset={84} phase={2.4} opacity={hovered ? 0.35 : 0.18} strokeWidth={1} speed={hovered ? 2.0 : 4} />
+            <WavePath accent={accent} amplitude={hovered ? 28 : 18} frequency={0.5} yOffset={44} phase={0} opacity={hovered ? 0.7 : 0.45} strokeWidth={2} speed={hovered ? 2.5 : 5} />
+            <WavePath accent={accent} amplitude={hovered ? 20 : 12} frequency={0.7} yOffset={64} phase={1.2} opacity={hovered ? 0.5 : 0.28} strokeWidth={1.5} speed={hovered ? 3.5 : 7} />
+            <WavePath accent={accent} amplitude={hovered ? 14 : 8} frequency={0.9} yOffset={84} phase={2.4} opacity={hovered ? 0.35 : 0.18} strokeWidth={1} speed={hovered ? 2.0 : 4} />
           </g>
         ))}
       </g>
