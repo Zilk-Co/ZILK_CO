@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Removed maximum-scale=1 — it prevents user zoom (WCAG 1.4.4) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
+
+    <title>Zilk Co. — Engineering Digital Businesses</title>
+    <meta
+      name="description"
+      content="Zilk Co. is a premium software engineering agency that builds digital businesses — web apps, mobile apps, enterprise software, and SaaS products crafted to the highest standard."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#060609" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Zilk Co. — Engineering Digital Businesses" />
+    <meta
+      property="og:description"
+      content="Premium software engineering agency. We build digital businesses — from the first pixel to the deepest database query."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zilk Co." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zilk Co. — Engineering Digital Businesses" />
+    <meta
+      name="twitter:description"
+      content="Premium software engineering agency. We build digital businesses — from the first pixel to the deepest database query."
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Zilk Co.",
+      "description": "Premium software engineering agency. Engineering Digital Businesses.",
+      "serviceType": [
+        "Web Development",
+        "Mobile App Development",
+        "Enterprise Software",
+        "UI/UX Design",
+        "SaaS Development"
+      ]
+    }
+    </script>
+
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+
+    <!--
+      Fonts — loaded via <link> (parallel with CSS) instead of @import inside CSS
+      (CSS @imports are sequential and block stylesheet parsing).
+      Preconnect hints ensure DNS + TLS are resolved before the stylesheet request.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF9ZMFDFQQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GF9ZMFDFQQ');
+    </script>
+  </head>
+  <body>
+    <!-- Skip navigation — first focusable element for keyboard / screen-reader users -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

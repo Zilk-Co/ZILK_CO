@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /work/
+
+Sitemap: https://zilkco.com/sitemap.xml

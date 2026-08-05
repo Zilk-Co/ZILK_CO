@@ -1,0 +1,16 @@
+# Render blueprint — deploys the full stack (API server + built SPA).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: zilk-co
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @workspace/zilk-co build && pnpm --filter @workspace/api-server build
+    startCommand: pnpm --filter @workspace/api-server start
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        sync: false

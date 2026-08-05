@@ -1,0 +1,579 @@
+/* Fonts are loaded via <link> in index.html for parallel loading performance.
+   The @import has been removed — CSS @imports are sequential and block parsing. */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --font-sans: var(--app-font-sans);
+  --font-display: var(--app-font-display);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+/* ─────────────────────────────────────────
+   ZILK CO. — ALWAYS DARK
+   Background: near-black with indigo undertone
+   Accent: Electric Teal — precise, engineered
+───────────────────────────────────────── */
+:root {
+  --app-font-sans: 'Inter', system-ui, sans-serif;
+  --app-font-display: 'Syne', system-ui, sans-serif;
+  --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius: 0.2rem;
+
+  --opaque-button-border-intensity: 9;
+  --button-outline: rgba(255, 255, 255, 0.08);
+  --badge-outline: rgba(255, 255, 255, 0.04);
+  --elevate-1: rgba(255, 255, 255, 0.03);
+  --elevate-2: rgba(255, 255, 255, 0.07);
+
+  /* Backgrounds */
+  --background: 240 11% 4%;
+  --foreground: 210 18% 91%;
+
+  /* Surfaces */
+  --border: 240 9% 13%;
+  --card: 240 11% 6%;
+  --card-foreground: 210 18% 91%;
+  --card-border: 240 9% 13%;
+  --popover: 240 11% 6%;
+  --popover-foreground: 210 18% 91%;
+  --popover-border: 240 9% 13%;
+
+  /* Brand — Electric Teal */
+  --primary: 185 82% 50%;
+  --primary-foreground: 240 11% 4%;
+  --primary-border: hsl(185 82% 42%);
+
+  /* Neutrals */
+  --secondary: 240 9% 8%;
+  --secondary-foreground: 210 12% 78%;
+  --secondary-border: hsl(240 9% 13%);
+
+  --muted: 240 9% 9%;
+  --muted-foreground: 240 6% 50%;
+  --muted-border: hsl(240 9% 13%);
+
+  --accent: 185 82% 50%;
+  --accent-foreground: 240 11% 4%;
+  --accent-border: hsl(185 82% 42%);
+
+  --destructive: 0 72% 56%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(0 72% 48%);
+
+  --input: 240 9% 13%;
+  --ring: 185 82% 50%;
+
+  /* Charts */
+  --chart-1: 185 82% 50%;
+  --chart-2: 210 80% 56%;
+  --chart-3: 260 68% 60%;
+  --chart-4: 30 78% 56%;
+  --chart-5: 0 72% 56%;
+
+  /* Sidebar */
+  --sidebar: 240 11% 4%;
+  --sidebar-foreground: 210 18% 91%;
+  --sidebar-border: 240 9% 13%;
+  --sidebar-primary: 185 82% 50%;
+  --sidebar-primary-foreground: 240 11% 4%;
+  --sidebar-primary-border: hsl(185 82% 42%);
+  --sidebar-accent: 240 9% 8%;
+  --sidebar-accent-foreground: 210 12% 78%;
+  --sidebar-accent-border: hsl(240 9% 13%);
+  --sidebar-ring: 185 82% 50%;
+
+  /* Shadows */
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 48px 96px rgba(0, 0, 0, 0.6);
+
+  --tracking-normal: -0.01em;
+}
+
+/* Mirror for dark variant selectors used by shadcn components */
+.dark {
+  --background: 240 11% 4%;
+  --foreground: 210 18% 91%;
+  --border: 240 9% 13%;
+  --card: 240 11% 6%;
+  --card-foreground: 210 18% 91%;
+  --card-border: 240 9% 13%;
+  --popover: 240 11% 6%;
+  --popover-foreground: 210 18% 91%;
+  --popover-border: 240 9% 13%;
+  --primary: 185 82% 50%;
+  --primary-foreground: 240 11% 4%;
+  --primary-border: hsl(185 82% 42%);
+  --secondary: 240 9% 8%;
+  --secondary-foreground: 210 12% 78%;
+  --secondary-border: hsl(240 9% 13%);
+  --muted: 240 9% 9%;
+  --muted-foreground: 240 6% 50%;
+  --muted-border: hsl(240 9% 13%);
+  --accent: 185 82% 50%;
+  --accent-foreground: 240 11% 4%;
+  --accent-border: hsl(185 82% 42%);
+  --destructive: 0 72% 56%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(0 72% 48%);
+  --input: 240 9% 13%;
+  --ring: 185 82% 50%;
+  --chart-1: 185 82% 50%;
+  --chart-2: 210 80% 56%;
+  --chart-3: 260 68% 60%;
+  --chart-4: 30 78% 56%;
+  --chart-5: 0 72% 56%;
+  --sidebar: 240 11% 4%;
+  --sidebar-foreground: 210 18% 91%;
+  --sidebar-border: 240 9% 13%;
+  --sidebar-primary: 185 82% 50%;
+  --sidebar-primary-foreground: 240 11% 4%;
+  --sidebar-primary-border: hsl(185 82% 42%);
+  --sidebar-accent: 240 9% 8%;
+  --sidebar-accent-foreground: 210 12% 78%;
+  --sidebar-accent-border: hsl(240 9% 13%);
+  --sidebar-ring: 185 82% 50%;
+}
+
+/* ─────────────────────────────────────────
+   LIGHT THEME
+   Premium inversion — not generic bootstrap white
+───────────────────────────────────────── */
+.light {
+  --background: 210 20% 98%;
+  --foreground: 222 47% 11%;
+  --border: 220 13% 88%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 220 13% 88%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 220 13% 88%;
+  --primary: 185 82% 44%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(185 82% 38%);
+  --secondary: 220 14% 94%;
+  --secondary-foreground: 220 9% 40%;
+  --secondary-border: hsl(220 13% 88%);
+  --muted: 220 14% 93%;
+  --muted-foreground: 220 9% 40%;
+  --muted-border: hsl(220 13% 88%);
+  --accent: 185 82% 44%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(185 82% 38%);
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --destructive-border: hsl(0 84% 52%);
+  --input: 220 13% 91%;
+  --ring: 185 82% 44%;
+  --chart-1: 185 82% 44%;
+  --chart-2: 221 83% 53%;
+  --chart-3: 262 83% 58%;
+  --chart-4: 25 95% 53%;
+  --chart-5: 0 84% 60%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-border: 220 13% 88%;
+  --sidebar-primary: 185 82% 44%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(185 82% 38%);
+  --sidebar-accent: 220 14% 94%;
+  --sidebar-accent-foreground: 220 9% 40%;
+  --sidebar-accent-border: hsl(220 13% 88%);
+  --sidebar-ring: 185 82% 44%;
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.07);
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.18);
+  --shadow-2xl: 0 48px 96px rgba(0, 0, 0, 0.2);
+
+  --elevate-1: rgba(0, 0, 0, 0.04);
+  --elevate-2: rgba(0, 0, 0, 0.07);
+  --button-outline: rgba(0, 0, 0, 0.1);
+  --badge-outline: rgba(0, 0, 0, 0.06);
+  --opaque-button-border-intensity: 88;
+}
+
+/* ─────────────────────────────────────────
+   BASE STYLES
+───────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: hsl(240 9% 14%) transparent;
+    scrollbar-width: thin;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .light html,
+  .light {
+    scrollbar-color: hsl(220 13% 82%) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(240 9% 15%);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(240 9% 22%);
+  }
+  .light ::-webkit-scrollbar-thumb {
+    background: hsl(220 13% 78%);
+  }
+  .light ::-webkit-scrollbar-thumb:hover {
+    background: hsl(220 13% 65%);
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  /* Custom cursor — hide system cursor on pointer devices only */
+  @media (pointer: fine) {
+    *,
+    *:hover {
+      cursor: none !important;
+    }
+  }
+
+  /* ── Keyboard focus indicators ──────────────────────────────────────────
+     cursor: none hides the system cursor for mouse users, but keyboard
+     users still need visible focus rings. :focus-visible fires only for
+     keyboard / assistive-tech navigation, leaving mouse interactions clean. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary) / 0.9);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* Inset ring for form controls so it doesn't clip outside the field */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-offset: -1px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.18);
+    color: hsl(var(--foreground));
+  }
+
+  .light ::selection {
+    background-color: hsl(var(--primary) / 0.15);
+    color: hsl(var(--foreground));
+  }
+
+  /* Prevent FOUC — page starts invisible, JS reveals it */
+  body {
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────────────────────
+   UTILITY CLASSES
+───────────────────────────────────────── */
+
+/* Fine dot grid — the architectural texture */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    hsl(var(--foreground) / 0.09) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+.light .dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    hsl(var(--foreground) / 0.06) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+/* Grain texture overlay — subtle film-like noise */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 320px 320px;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+
+.light .grain::after {
+  opacity: 0.015;
+}
+
+/* Marquee — horizontal infinite scroll */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Clip container — parent must have overflow: hidden */
+.clip-text-container {
+  overflow: hidden;
+  display: block;
+}
+
+/* Glow — ambient primary light */
+.glow-teal {
+  box-shadow: 0 0 60px hsl(var(--primary) / 0.12),
+    0 0 120px hsl(var(--primary) / 0.06);
+}
+
+.light .glow-teal {
+  box-shadow: 0 0 40px hsl(var(--primary) / 0.08),
+    0 0 80px hsl(var(--primary) / 0.04);
+}
+
+/* Text gradient heading */
+.text-gradient-hero {
+  background: linear-gradient(
+    160deg,
+    hsl(var(--foreground)) 0%,
+    hsl(var(--foreground) / 0.75) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass surface */
+.glass {
+  background: hsl(var(--background) / 0.78);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+.light .glass {
+  background: hsl(var(--background) / 0.85);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+}
+
+/* Scroll margin — offset fixed nav height on anchor jumps */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Service & project card light-mode shadow override */
+.light .group[data-testid^="service-card"],
+.light .group[data-testid^="project-card"] {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+.light .group[data-testid^="service-card"]:hover,
+.light .group[data-testid^="project-card"]:hover {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--primary) / 0.06), 0 12px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Service card visual area — dark surface in light mode so SVG icons stay visible */
+.light .group[data-testid^="service-card"] > div:first-of-type {
+  background: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 16%) 100%) !important;
+}
+
+/* Service card category label — boost contrast */
+.light .group[data-testid^="service-card"] .text-foreground\/25 {
+  color: hsl(222 47% 30%) !important;
+}
+
+/* Service card description — boost contrast */
+.light .group[data-testid^="service-card"] .text-foreground\/40 {
+  color: hsl(222 47% 35%) !important;
+}
+
+/* ProjectsGrid spotlight glow — subtle in light mode */
+.light .group[data-testid^="project-card"] .absolute.inset-0.z-\\[5\\] {
+  opacity: 0.5 !important;
+}
+
+/* ─── Light mode: boost all low-opacity foreground text ─── */
+/* On dark bg, text-foreground/20 is a visible dim grey. On white, it's invisible.
+   Boost every opacity tier so contrast stays readable. */
+.light .text-foreground\/12 { color: hsl(222 47% 22% / 1) !important; }
+.light .text-foreground\/15 { color: hsl(222 47% 25% / 1) !important; }
+.light .text-foreground\/18 { color: hsl(222 47% 28% / 1) !important; }
+.light .text-foreground\/20 { color: hsl(222 47% 30% / 1) !important; }
+.light .text-foreground\/22 { color: hsl(222 47% 32% / 1) !important; }
+.light .text-foreground\/25 { color: hsl(222 47% 34% / 1) !important; }
+.light .text-foreground\/28 { color: hsl(222 47% 36% / 1) !important; }
+.light .text-foreground\/30 { color: hsl(222 47% 38% / 1) !important; }
+.light .text-foreground\/35 { color: hsl(222 47% 40% / 1) !important; }
+.light .text-foreground\/38 { color: hsl(222 47% 42% / 1) !important; }
+.light .text-foreground\/40 { color: hsl(222 47% 44% / 1) !important; }
+.light .text-foreground\/45 { color: hsl(222 47% 46% / 1) !important; }
+
+/* Also boost bg-foreground low-opacity used for inputs, tags, etc. */
+.light .bg-foreground\/\[0\.02\] { background-color: hsl(222 47% 11% / 0.04) !important; }
+.light .bg-foreground\/\[0\.03\] { background-color: hsl(222 47% 11% / 0.05) !important; }
+.light .bg-foreground\/\[0\.04\] { background-color: hsl(222 47% 11% / 0.06) !important; }
+.light .bg-foreground\/\[0\.05\] { background-color: hsl(222 47% 11% / 0.07) !important; }
+.light .bg-foreground\/\[0\.06\] { background-color: hsl(222 47% 11% / 0.08) !important; }
+
+/* Boost border-foreground low-opacity too */
+.light .border-foreground\/\[0\.06\] { border-color: hsl(222 47% 11% / 0.12) !important; }
+.light .border-foreground\/\[0\.07\] { border-color: hsl(222 47% 11% / 0.14) !important; }
+.light .border-foreground\/\[0\.08\] { border-color: hsl(222 47% 11% / 0.16) !important; }
+.light .border-foreground\/\[0\.09\] { border-color: hsl(222 47% 11% / 0.18) !important; }
+.light .border-foreground\/\[0\.1\] { border-color: hsl(222 47% 11% / 0.2) !important; }
+
+/* Team card — light mode shadow + border fix */
+.light #team .group,
+.light section#team > div > div > div > div {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+.light #team .group:hover,
+.light section#team > div > div > div > div:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+/* Fix team card hardcoded white border and bg in light mode */
+.light section#team .relative.flex.flex-col.overflow-hidden {
+  border-color: hsl(222 47% 11% / 0.1) !important;
+  background: hsl(0 0% 100% / 1) !important;
+}
+.light section#team .relative.flex.flex-col.overflow-hidden:hover {
+  border-color: hsl(185 82% 44% / 0.3) !important;
+  background: hsl(185 82% 44% / 0.03) !important;
+}
+
+/* Input fields — ensure they're visible on white */
+.light input, .light textarea, .light select {
+  color: hsl(222 47% 11%) !important;
+}
+.light input::placeholder, .light textarea::placeholder {
+  color: hsl(222 47% 40%) !important;
+}
+
+/* Balanced headline wrapping */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ── Skip link ──────────────────────────────────────────────────────────
+   Visually hidden until focused — first tab stop for keyboard / SR users */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 99999;
+  padding: 0.625rem 1.25rem;
+  background: hsl(var(--primary));
+  color: hsl(240 11% 4%);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 0;
+  outline: none;
+}
