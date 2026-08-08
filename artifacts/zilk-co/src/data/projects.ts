@@ -24,6 +24,8 @@ export interface ProjectData {
   challengeQuote: string;
   solution: string;
   solutionPoints: string[];
+  result: string;
+  businessValue: string;
   features: Feature[];
   tech: string[];
   status: 'Live' | 'In Development' | 'Beta';
@@ -61,6 +63,10 @@ export const PROJECTS: ProjectData[] = [
       'Sales tracking by product, region, and client with drill-down analytics',
       'Product expiry alerts and low-stock warning thresholds',
     ],
+    result:
+      'Within 3 months of launch, the client consolidated all inventory, sales, and financial operations into one platform. Financial reporting that previously took 3 days now happens in real time. Inventory discrepancies dropped to near zero.',
+    businessValue:
+      'A ₦500M medical distribution company scaled from spreadsheets to a fully digital operation — enabling faster decisions, eliminating data silos, and laying the groundwork for expansion into new regions.',
     features: [
       {
         number: '01',
@@ -128,6 +134,10 @@ export const PROJECTS: ProjectData[] = [
       'Animated menu with category filtering and rich product photography',
       'Mobile-first responsive design optimized for on-the-go ordering',
     ],
+    result:
+      'The new website doubled online orders within the first month. Brand perception shifted from "generic franchise" to "premium specialty" — matching the in-store experience they had always delivered.',
+    businessValue:
+      'Direct online ordering reduced dependency on third-party delivery platforms. A branded digital experience increased customer loyalty and average order value.',
     features: [
       {
         number: '01',
@@ -190,6 +200,10 @@ export const PROJECTS: ProjectData[] = [
       'Optimized lead capture and structured quote request flow',
       'Performance-first build scoring 95+ on Core Web Vitals',
     ],
+    result:
+      'Enterprise quote requests increased 40% in the first quarter post-launch. The site\'s performance and structure directly contributed to winning two major commercial contracts.',
+    businessValue:
+      'A professional digital presence that matches the quality of their physical projects — converting visitors into qualified leads through clear service definitions and streamlined quote flows.',
     features: [
       {
         number: '01',
@@ -257,6 +271,10 @@ export const PROJECTS: ProjectData[] = [
       'Immersive project reveal sequences using clip-path animations',
       'Custom cursor and micro-interactions on every interactive element',
     ],
+    result:
+      'The site earned features on Behance and Awwwards shortlists. Client inquiries increased 60% — with multiple prospects citing the website as the reason they reached out.',
+    businessValue:
+      'Motion-first design positioned the firm as a premium brand in a commoditized industry. The digital experience now matches the craftsmanship of their physical work.',
     features: [
       {
         number: '01',
@@ -325,6 +343,10 @@ export const PROJECTS: ProjectData[] = [
       'AI-assisted content structuring and professional phrasing',
       'HR management system for resume collection and candidate tracking',
     ],
+    result:
+      'Within weeks of launch, users were creating portfolios and exporting CVs across 40+ formats. AI integration reduced content structuring time from hours to minutes.',
+    businessValue:
+      'A SaaS platform that turns resume creation from a tedious task into a quick, automated workflow — built to serve both individual job seekers and HR teams at scale.',
     features: [
       {
         number: '01',

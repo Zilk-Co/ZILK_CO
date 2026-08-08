@@ -315,7 +315,7 @@ function ProjectChallenge({ project }: { project: ReturnType<typeof getProject> 
 }
 
 /* ─────────────────────────────────────────
-   SOLUTION
+    SOLUTION
 ───────────────────────────────────────── */
 function ProjectSolution({ project }: { project: ReturnType<typeof getProject> & {} }) {
   return (
@@ -386,6 +386,55 @@ function ProjectSolution({ project }: { project: ReturnType<typeof getProject> &
 }
 
 /* ─────────────────────────────────────────
+    RESULT
+───────────────────────────────────────── */
+function ProjectResult({ project }: { project: ReturnType<typeof getProject> & {} }) {
+  return (
+    <section className="bg-secondary py-16 md:py-32 border-t border-border" data-testid="project-result">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 md:px-10">
+        <motion.div
+          variants={staggerContainer(0.09, 0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          <SectionLabel number="04" text="The Result" />
+
+          <div className="grid md:grid-cols-[2fr_3fr] gap-8 md:gap-20">
+            <div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  variants={clipReveal}
+                  className="font-display font-bold text-foreground leading-[0.9] tracking-tight"
+                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
+                >
+                  What
+                </motion.h2>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  variants={clipReveal}
+                  className="font-display font-bold text-foreground/40 leading-[0.9] tracking-tight"
+                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
+                >
+                  Changed
+                </motion.h2>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <motion.p variants={fadeUp} className="text-[15px] md:text-base text-foreground/50 leading-relaxed font-light">
+                {project.result}
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    FEATURES
 ───────────────────────────────────────── */
 function ProjectFeatures({ project }: { project: ReturnType<typeof getProject> & {} }) {
@@ -404,7 +453,7 @@ function ProjectFeatures({ project }: { project: ReturnType<typeof getProject> &
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="04" text="Key Features" />
+          <SectionLabel number="05" text="Key Features" />
 
           {/* Section heading */}
           <div className="overflow-hidden mb-14">
@@ -464,7 +513,7 @@ function ProjectFeatures({ project }: { project: ReturnType<typeof getProject> &
 }
 
 /* ─────────────────────────────────────────
-   TECHNOLOGY
+    TECHNOLOGY
 ───────────────────────────────────────── */
 function ProjectTech({ project }: { project: ReturnType<typeof getProject> & {} }) {
   return (
@@ -476,7 +525,7 @@ function ProjectTech({ project }: { project: ReturnType<typeof getProject> & {} 
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="05" text="Technology" />
+          <SectionLabel number="06" text="Technology" />
 
           <div className="grid md:grid-cols-[2fr_3fr] gap-8 md:gap-20 items-start">
             <div>
@@ -528,6 +577,61 @@ function ProjectTech({ project }: { project: ReturnType<typeof getProject> & {} 
 }
 
 /* ─────────────────────────────────────────
+    BUSINESS VALUE
+───────────────────────────────────────── */
+function ProjectBusinessValue({ project }: { project: ReturnType<typeof getProject> & {} }) {
+  return (
+    <section
+      className="bg-secondary py-16 md:py-32 border-t border-border"
+      style={{
+        backgroundImage: `radial-gradient(circle at 80% 50%, hsl(${project.accentHue} 80% 50% / 0.04) 0%, transparent 60%)`,
+      }}
+      data-testid="project-business-value"
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 md:px-10">
+        <motion.div
+          variants={staggerContainer(0.09, 0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          <SectionLabel number="07" text="Business Value" />
+
+          <div className="grid md:grid-cols-[2fr_3fr] gap-8 md:gap-20">
+            <div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  variants={clipReveal}
+                  className="font-display font-bold text-foreground leading-[0.9] tracking-tight"
+                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
+                >
+                  Why It
+                </motion.h2>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  variants={clipReveal}
+                  className="font-display font-bold text-foreground/40 leading-[0.9] tracking-tight"
+                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
+                >
+                  Matters
+                </motion.h2>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              <motion.p variants={fadeUp} className="text-[15px] md:text-base text-foreground/50 leading-relaxed font-light">
+                {project.businessValue}
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    GALLERY
 ───────────────────────────────────────── */
 function ProjectGallery({ project }: { project: ReturnType<typeof getProject> & {} }) {
@@ -540,7 +644,7 @@ function ProjectGallery({ project }: { project: ReturnType<typeof getProject> & 
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="06" text="Gallery" />
+          <SectionLabel number="08" text="Gallery" />
 
           {/* Full-width screenshot */}
           <motion.div
@@ -746,8 +850,10 @@ export function ProjectPage() {
         <ProjectOverview project={project} />
         <ProjectChallenge project={project} />
         <ProjectSolution project={project} />
+        <ProjectResult project={project} />
         <ProjectFeatures project={project} />
         <ProjectTech project={project} />
+        <ProjectBusinessValue project={project} />
         <ProjectGallery project={project} />
         <ProjectCTA project={project} />
         <NextProjectTeaser currentId={project.id} />
