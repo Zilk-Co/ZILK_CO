@@ -23,6 +23,8 @@ export interface ProjectData {
   challengeQuote: string;
   solution: string;
   solutionPoints: string[];
+  result: string;
+  resultPoints: string[];
   features: Feature[];
   tech: string[];
   status: 'Live' | 'In Development' | 'Beta';
@@ -59,6 +61,14 @@ export const PROJECTS: ProjectData[] = [
       'Automated financial reporting with P&L and cash flow dashboards',
       'Sales tracking by product, region, and client with drill-down analytics',
       'Product expiry alerts and low-stock warning thresholds',
+    ],
+    result:
+      'The platform is now the operational backbone of the business. Decisions that once ran three days behind reality are now made on live data — inventory, sales, and finance all reconciled in one place. The client scaled from spreadsheet chaos to a structured, auditable operation.',
+    resultPoints: [
+      'Inventory discrepancies eliminated with transaction-level live tracking',
+      'Financial reporting turnaround cut from days to seconds',
+      'Centralized workflow across sales, warehouse, and finance teams',
+      'A scalable data foundation for the next phase of business growth',
     ],
     features: [
       {
@@ -127,6 +137,14 @@ export const PROJECTS: ProjectData[] = [
       'Animated menu with category filtering and rich product photography',
       'Mobile-first responsive design optimized for on-the-go ordering',
     ],
+    result:
+      'The website now earns the brand\'s story instead of diluting it. Customers experience the same warmth online as in-store, and ordering is a frictionless path — turning browsers into buyers with a mobile-first, premium storefront.',
+    resultPoints: [
+      'Digital presence finally matches the quality of the in-store experience',
+      'Direct online ordering with Stripe checkout generating revenue',
+      'Brand recall strengthened through consistent visual identity',
+      'Mobile-first experience built for the phone-first customer',
+    ],
     features: [
       {
         number: '01',
@@ -188,6 +206,14 @@ export const PROJECTS: ProjectData[] = [
       'Service detail pages with clear scope definitions and deliverables',
       'Optimized lead capture and structured quote request flow',
       'Performance-first build scoring 95+ on Core Web Vitals',
+    ],
+    result:
+      'The firm now presents at the level it wins contracts. Enterprise decision-makers get a credible, fast, conversion-focused experience that pre-qualifies leads before the first call — turning a 2010-era presence into a 7-figure-ready one.',
+    resultPoints: [
+      'Professional credibility aligned with enterprise contract ambitions',
+      'Structured quote flow capturing qualified leads with project context',
+      '95+ Core Web Vitals scores reinforcing trust and search visibility',
+      'Project galleries that let completed work sell the next contract',
     ],
     features: [
       {
@@ -255,6 +281,14 @@ export const PROJECTS: ProjectData[] = [
       'Cinematic parallax hero with full-bleed photography and text overlays',
       'Immersive project reveal sequences using clip-path animations',
       'Custom cursor and micro-interactions on every interactive element',
+    ],
+    result:
+      'The site gives a commodity industry a luxury brand presence. Visitors don\'t just read about the craftsmanship — they feel it through choreographed motion, standing out in a market where every competitor looks the same.',
+    resultPoints: [
+      'A standout digital presence in a saturated, lookalike market',
+      'Immersive experience that holds attention beyond a glance',
+      'Positioned on par with agency work from global markets',
+      'Motion as a brand asset — repeatable, consistent, signature',
     ],
     features: [
       {
