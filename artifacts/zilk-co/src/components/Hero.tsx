@@ -152,7 +152,7 @@ export function Hero({ started }: { started: boolean }) {
           {/* Heading — line-by-line clip reveal */}
           <h1
             className="font-display font-extrabold leading-[0.88] tracking-[-0.04em] text-foreground mb-10 select-none"
-            style={{ fontSize: 'clamp(3.8rem, 9vw, 10rem)' }}
+            style={{ fontSize: 'clamp(2.5rem, 6.5vw, 7.5rem)' }}
           >
             {/* Line 1 */}
             <span className="block overflow-y-hidden">
