@@ -155,7 +155,7 @@ export function Hero({ started }: { started: boolean }) {
             style={{ fontSize: 'clamp(3.8rem, 9vw, 10rem)' }}
           >
             {/* Line 1 */}
-            <span className="block overflow-hidden">
+            <span className="block overflow-y-hidden">
               <motion.span
                 variants={clipReveal}
                 className="block"
@@ -165,7 +165,7 @@ export function Hero({ started }: { started: boolean }) {
             </span>
 
             {/* Line 2 */}
-            <span className="block overflow-hidden">
+            <span className="block overflow-y-hidden">
               <motion.span
                 variants={clipReveal}
                 className="block text-foreground/80"
@@ -175,7 +175,7 @@ export function Hero({ started }: { started: boolean }) {
             </span>
 
             {/* Line 3 */}
-            <span className="block overflow-hidden">
+            <span className="block overflow-y-hidden">
               <motion.span
                 variants={clipReveal}
                 className="block"
