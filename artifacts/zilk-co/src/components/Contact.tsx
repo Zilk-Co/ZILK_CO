@@ -60,9 +60,9 @@ const BUDGETS = [
 ];
 
 const TIMELINES = [
-  { value: 'sprint', label: 'Sprint', sub: '1 – 2 Months' },
-  { value: 'standard', label: 'Standard', sub: '3 – 6 Months' },
-  { value: 'extended', label: 'Extended', sub: '6 – 12 Months' },
+  { value: 'sprint', label: 'Sprint', sub: '5 – 7 Days' },
+  { value: 'standard', label: 'Standard', sub: '1 – 2 Months' },
+  { value: 'extended', label: 'Extended', sub: '5 – 6 Months' },
   { value: 'partnership', label: 'Partnership', sub: 'Ongoing' },
 ];
 
