@@ -53,10 +53,10 @@ const PROJECT_TYPES = [
 ];
 
 const BUDGETS = [
-  { value: 'starter', label: 'Starter', sub: 'Under $5,000' },
-  { value: 'growth', label: 'Growth', sub: '$5K – $15K' },
-  { value: 'scale', label: 'Scale', sub: '$15K – $50K' },
-  { value: 'enterprise', label: 'Enterprise', sub: '$50,000+' },
+  { value: 'starter', label: 'Starter', sub: '$100 – $200' },
+  { value: 'growth', label: 'Growth', sub: '$500 – $600' },
+  { value: 'scale', label: 'Scale', sub: '$2K – $5K' },
+  { value: 'enterprise', label: 'Enterprise', sub: '$10K – $20K' },
 ];
 
 const TIMELINES = [
