@@ -386,83 +386,6 @@ function ProjectSolution({ project }: { project: ReturnType<typeof getProject> &
 }
 
 /* ─────────────────────────────────────────
-   RESULT
-───────────────────────────────────────── */
-function ProjectResult({ project }: { project: ReturnType<typeof getProject> & {} }) {
-  return (
-    <section
-      className="bg-secondary py-24 md:py-32 border-t border-border"
-      style={{
-        backgroundImage: `radial-gradient(circle at 80% 20%, hsl(${project.accentHue} 80% 50% / 0.05) 0%, transparent 60%)`,
-      }}
-      data-testid="project-result"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <motion.div
-          variants={staggerContainer(0.09, 0)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          <SectionLabel number="04" text="The Result" />
-
-          <div className="grid md:grid-cols-[2fr_3fr] gap-12 md:gap-20">
-            <div>
-              <div className="overflow-hidden">
-                <motion.h2
-                  variants={clipReveal}
-                  className="font-display font-bold text-white leading-[0.9] tracking-tight"
-                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
-                >
-                  The
-                </motion.h2>
-              </div>
-              <div className="overflow-hidden">
-                <motion.h2
-                  variants={clipReveal}
-                  className="font-display font-bold text-white/40 leading-[0.9] tracking-tight"
-                  style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)' }}
-                >
-                  Result
-                </motion.h2>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-8">
-              <motion.p variants={fadeUp} className="text-[15px] md:text-base text-white/50 leading-relaxed font-light">
-                {project.result}
-              </motion.p>
-
-              {/* Result points */}
-              <motion.ul
-                variants={staggerContainer(0.08, 0)}
-                className="flex flex-col gap-3"
-              >
-                {project.resultPoints.map((point, i) => (
-                  <motion.li
-                    key={i}
-                    variants={fadeUp}
-                    className="flex items-start gap-3"
-                  >
-                    <ArrowUpRight
-                      size={15}
-                      className="text-primary/70 mt-[2px] flex-shrink-0"
-                    />
-                    <span className="text-[14px] text-white/55 leading-relaxed font-light">
-                      {point}
-                    </span>
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────
    FEATURES
 ───────────────────────────────────────── */
 function ProjectFeatures({ project }: { project: ReturnType<typeof getProject> & {} }) {
@@ -481,7 +404,7 @@ function ProjectFeatures({ project }: { project: ReturnType<typeof getProject> &
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="05" text="Key Features" />
+          <SectionLabel number="04" text="Key Features" />
 
           {/* Section heading */}
           <div className="overflow-hidden mb-14">
@@ -553,7 +476,7 @@ function ProjectTech({ project }: { project: ReturnType<typeof getProject> & {} 
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="06" text="Technology" />
+          <SectionLabel number="05" text="Technology" />
 
           <div className="grid md:grid-cols-[2fr_3fr] gap-12 md:gap-20 items-start">
             <div>
@@ -617,7 +540,7 @@ function ProjectGallery({ project }: { project: ReturnType<typeof getProject> & 
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
         >
-          <SectionLabel number="07" text="Gallery" />
+          <SectionLabel number="06" text="Gallery" />
 
           {/* Full-width screenshot */}
           <motion.div
@@ -822,7 +745,6 @@ export function ProjectPage() {
         <ProjectOverview project={project} />
         <ProjectChallenge project={project} />
         <ProjectSolution project={project} />
-        <ProjectResult project={project} />
         <ProjectFeatures project={project} />
         <ProjectTech project={project} />
         <ProjectGallery project={project} />
